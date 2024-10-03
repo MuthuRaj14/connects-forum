@@ -9,9 +9,11 @@ import { Textarea } from "@/components/ui/textarea";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import Image from "next/image";
 import Link from "next/link";
+import {unstable_noStore as noStore} from 'next/cache'
 
 // Fetch subreddit data by name and return the result
 async function getData(name: string) {
+  noStore();
   return await prisma.subreddit.findUnique({
     where: {
       name: name,

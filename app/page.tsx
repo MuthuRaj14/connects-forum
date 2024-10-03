@@ -6,8 +6,10 @@ import { CreatePostCard } from "./components/CreatePostCard";
 import prisma from "./lib/db";
 import { PostCard } from "./components/PostCard";
 import Pagination from "./components/Pagination";
+import {unstable_noStore as noStore} from 'next/cache'
 
 async function getData(page: number) {
+  noStore();
   const [count, data] = await prisma.$transaction([
     prisma.post.count(),
     prisma.post.findMany({
